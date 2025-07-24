@@ -12,7 +12,7 @@ type Props = {
 export default function TodoItem({ todo, onToggle }: Props) {
     return(
         <div className="flex justify-between items-center
-        h-[60px] p-4 rounded-md shadow-md gap-4 bg-gray-100">
+        h-[60px] p-4 m-1 rounded-md shadow-md gap-4 bg-gray-100">
             <div className="flex items-center gap-2 overflow-hidden">
                 <Checkbox
                     checked={todo.completed}

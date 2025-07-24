@@ -8,14 +8,14 @@ type Props ={
 
 export default function TodoHeader({todoCount, onClickAdd}: Props){
     return(
-        <div className="bg-amber-300">
+        <div className="bg-gray-50">
             <div className="flex justify-between items-center">
                 <h1 className="text-3xl font-bold text-gray-800 mb-2">할일 목록</h1>
-                <Button size="sm" onClick={onClickAdd}>
+                <Button variant="ghost" className="text-white bg-gray-900 m-2" onClick={onClickAdd}>
                     추가
                 </Button>
             </div>
-            <p className="text-gray-600">총 {todoCount}개의 할일이 남았습니다.</p>
+            <p className="text-gray-700">총 {todoCount}개의 할일이 남았습니다.</p>
         </div>
     );
 }

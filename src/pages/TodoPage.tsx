@@ -24,9 +24,8 @@ export default function TodoPage(){
     const remainigCount = todos.filter((todo) => !todo.completed).length
 
     return(
-        <div className="bg-green-300">
+        <div>
             <TodoHeader todoCount={remainigCount} onClickAdd={() => {}} />
-                <div>TodoPage!</div> 
             <TodoList todos={todos} onToggle={hadleToggle}/>
         </div>
     )

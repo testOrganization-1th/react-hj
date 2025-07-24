@@ -10,8 +10,7 @@ type Props = {
 export default function TodoList({todos, onToggle}: Props){
 
     return(
-        <div className="bg-green-800">
-            <div>TodoList</div>
+        <div>
             <div>
                 {todos.map((todo)=><TodoItem todo={todo} onToggle={onToggle}></TodoItem>)}
             </div>

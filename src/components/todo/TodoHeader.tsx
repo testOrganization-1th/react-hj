@@ -8,8 +8,8 @@ type Props ={
 
 export default function TodoHeader({todoCount, onClickAdd}: Props){
     return(
-        <div>
-            <div className="flex justify-between items-center bg-amber-300">
+        <div className="bg-amber-300">
+            <div className="flex justify-between items-center">
                 <h1 className="text-3xl font-bold text-gray-800 mb-2">할일 목록</h1>
                 <Button size="sm" onClick={onClickAdd}>
                     추가

@@ -20,13 +20,17 @@ export default function TodoPage(){
         );
     };
 
+    const onAdd = (todo: Todo) => {
+        return setTodos((prev) => [todo, ...prev]);
+    }
+
     // 체크된 할일 반영하여 감소된 todo.count
     const remainigCount = todos.filter((todo) => !todo.completed).length
 
     return(
         <div>
-            <TodoHeader todoCount={remainigCount} onClickAdd={() => {}} />
-            <TodoList todos={todos} onToggle={hadleToggle}/>
+            <TodoHeader todoCount={remainigCount} onAdd={onAdd} todos={todos}/>
+            <TodoList todos={todos} onToggle={hadleToggle}  />
         </div>
     )
 }

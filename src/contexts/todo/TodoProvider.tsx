@@ -1,11 +1,11 @@
 import type { Todo } from "@/types/todo";
 import { sortTodos } from "@/utils/SortTodo";
-import { useState, type PropsWithChildren } from "react";
+import { useEffect, useState, type PropsWithChildren } from "react";
 import { TodoContext } from "./TodoContext";
+import { fetchTodos } from "@/api/todo";
 
 export const TodoProvider = ({ children }: PropsWithChildren) => {
     const [todos, setTodos] = useState<Todo[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     const handleToggleTodo = (id: number) => {
@@ -28,19 +28,27 @@ export const TodoProvider = ({ children }: PropsWithChildren) => {
         return setTodos(todos.filter((todo)=>todo.id !== id));
     }
 
-    // 체크된 할일 반영하여 감소된 todo.count
-    // const remainigCount = todos.filter((todo) => !todo.completed).length
+    useEffect(() => {
+        const fetchData = async () => {
+        fetchTodos()
+            .then(setTodos)
+            .catch(setError)
+            .finally();
+        };
+
+        fetchData();
+    }, []);
+
 
     return (
     <TodoContext.Provider
         value={{
-            isLoading,
             error,
             todos: todos,
-            addTodo: handleAddTodo,
-            updateTodo: handleUpdateTodo,
-            deleteTodo: handleDeleteTodo,
-            toggleTodo: handleToggleTodo
+            onAdd: handleAddTodo,
+            onUpdate: handleUpdateTodo,
+            onDelete: handleDeleteTodo,
+            onToggle: handleToggleTodo
         }}
     >
         {children}

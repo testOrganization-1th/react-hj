@@ -4,17 +4,15 @@ import { cn } from "@/lib/utils";
 import { Checkbox } from "../ui/checkbox";
 import UpdateTodoModal from "./modal/UpdateTodoModal";
 import { useState } from "react";
+import { useTodo } from "@/contexts/todo/useTodo";
 
 type Props = {
     todo: Todo;
 
-    onToggle:(id: number) => void;
-    onUpdate:(todo: Todo) => void;
-    onDelete:(id: number) => void;
 };
 
-export default function TodoItem({ todo, onToggle, onUpdate, onDelete }: Props) {
-
+export default function TodoItem({ todo }: Props) {
+    const { onDelete, onToggle } = useTodo();
     const [ isUpdateTodoModalOpen, setIsUpdateTodoModalOpen ] = useState(false);
 
     return(
@@ -51,10 +49,9 @@ export default function TodoItem({ todo, onToggle, onUpdate, onDelete }: Props) 
 
             {isUpdateTodoModalOpen && (
                 <UpdateTodoModal
-                todo = {todo}
+                selectedTodo={todo}
                 isOpen = {isUpdateTodoModalOpen}
                 onClose={() => setIsUpdateTodoModalOpen(false)}
-                onUpdate = {onUpdate}
                 />
             )}
         </div>

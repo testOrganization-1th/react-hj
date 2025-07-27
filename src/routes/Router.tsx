@@ -1,3 +1,4 @@
+import TodoLayOut from "@/contexts/todo/TodoLayout";
 import NotFound from "@/NotFound";
 import HomePage from "@/pages/HomePage";
 import TodoDetailPage from "@/pages/TodoDetailPage";
@@ -9,7 +10,7 @@ export default function Router(){
     return(
         <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/todo">
+        <Route path="/todo" element={<TodoLayOut />}>
             <Route index element={<TodoPage />} />
             <Route path=":id" element={<TodoDetailPage />} />
         </Route>

@@ -5,6 +5,7 @@ import { Checkbox } from "../ui/checkbox";
 import UpdateTodoModal from "./modal/UpdateTodoModal";
 import { useState } from "react";
 import { useTodo } from "@/contexts/todo/useTodo";
+import Card from "../base/Card";
 
 type Props = {
     todo: Todo;
@@ -16,8 +17,7 @@ export default function TodoItem({ todo }: Props) {
     const [ isUpdateTodoModalOpen, setIsUpdateTodoModalOpen ] = useState(false);
 
     return(
-        <div className="flex justify-between items-center
-        h-[60px] p-4 m-1 rounded-md shadow-md gap-4 bg-gray-100">
+        <Card className="flex justify-between items-center bg-gray-100">
             <div className="flex items-center gap-2 overflow-hidden">
                 <Checkbox
                     checked={todo.completed}
@@ -54,6 +54,6 @@ export default function TodoItem({ todo }: Props) {
                 onClose={() => setIsUpdateTodoModalOpen(false)}
                 />
             )}
-        </div>
+        </Card>
     )
 }

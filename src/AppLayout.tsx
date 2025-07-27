@@ -8,7 +8,7 @@ import type { PropsWithChildren } from "react";
 export default function AppLayout({ children }: PropsWithChildren){
     return(
         <div className="w-screen h-screen bg-gray-300">
-            <div className="w-[600px] h-full mx-auto bg-pink-200">{children}</div>
+            <div className="flex flex-col w-[600px] h-full mx-auto bg-pink-200">{children}</div>
         </div>
     )
 }

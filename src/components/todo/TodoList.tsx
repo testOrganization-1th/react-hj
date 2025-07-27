@@ -12,7 +12,11 @@ export default function TodoList({todos, onToggle}: Props){
     return(
         <div>
             <div>
-                {todos.map((todo)=><TodoItem todo={todo} onToggle={onToggle}></TodoItem>)}
+                {todos.map((todo)=>
+                <TodoItem 
+                    todo={todo} 
+                    onToggle={onToggle} >
+                </TodoItem>)}
             </div>
         </div>
     )

@@ -1,17 +1,15 @@
+import { useTodo } from "@/contexts/todo/useTodo";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import CreateTodoModal from "./modal/CreateTodoModal";
-import type { Todo } from "@/types/todo";
 
-type Props ={
-    todoCount: number;
-    todos:Todo[]
-    
-    onAdd: (todo: Todo) => void;
-}
 
-export default function TodoHeader({todoCount, todos, onAdd}: Props){
+export default function TodoHeader(){
+    const { todos } = useTodo();
     const [isCreateTodoModalOpen, setIsCreateTodoModalOpen] = useState(false);
+
+     // 체크된 할일 반영하여 감소된 todo.count
+    const remainigCount = todos.filter((todo) => !todo.completed).length
 
     return(
         <div className="bg-gray-800">
@@ -21,14 +19,12 @@ export default function TodoHeader({todoCount, todos, onAdd}: Props){
                     추가
                 </Button>
             </div>
-            <p className="text-pink-300">총 {todoCount}개의 할일이 남았습니다.</p>
+            <p className="text-pink-300">총 {remainigCount}개의 할일이 남았습니다.</p>
 
             {isCreateTodoModalOpen && (
                 <CreateTodoModal
-                todos= {todos}
                 isOpen={isCreateTodoModalOpen}
                 onClose={() => setIsCreateTodoModalOpen(false)}
-                onAdd={onAdd}
                 />
             )}
         </div>

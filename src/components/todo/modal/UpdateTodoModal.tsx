@@ -1,31 +1,29 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useTodo } from "@/contexts/todo/useTodo";
 import type { Todo } from "@/types/todo";
 import { useRef } from "react";
 
 type Props = {
     isOpen: boolean;
-    todo: Todo
+    selectedTodo: Todo;
 
-    onUpdate: (todo: Todo) => void;
     onClose: () => void;
 }
 
-export default function UpdateTodoModal({ isOpen, todo, onUpdate, onClose }: Props){
+export default function UpdateTodoModal({ isOpen, selectedTodo, onClose }: Props){
 
+    const { onUpdate } = useTodo();
     const inputRef = useRef<HTMLInputElement>(null);
-
+    
     const handleUpdateTodo = () => {
-        if(inputRef.current){
-            onUpdate({
-                id: todo.id, 
-                title: inputRef.current.value.trim(), 
-                completed:false 
-            });
-            console.log(todo);
-            onClose();
-        }
-    }
+        if (!inputRef.current) return;
+
+        onUpdate({...selectedTodo, title: inputRef.current.value});
+
+        onClose();
+    };
+
 
     return(
         <>
@@ -35,7 +33,7 @@ export default function UpdateTodoModal({ isOpen, todo, onUpdate, onClose }: Pro
                         <DialogTitle>할일 수정</DialogTitle>
                     </DialogHeader>
                     <div>
-                        <input ref={inputRef} defaultValue={todo.title}></input>
+                        <input ref={inputRef} defaultValue={selectedTodo.title}></input>
                     </div>
 
                     <DialogFooter>

@@ -1,28 +1,15 @@
-import type { Todo } from "@/types/todo";
+import { useTodo } from "@/contexts/todo/useTodo";
 import TodoItem from "./TodoItem";
 
-type Props = {
-    todos: Todo[];
 
-    onToggle:(id: number) => void;
-    onUpdate:(todo: Todo) => void;
-    onDelete:(id: number) => void;
-}
 
-export default function TodoList({todos, onToggle, onDelete, onUpdate}: Props){
+export default function TodoList(){
 
-    return(
-        <div>
-            <div>
-                {todos.map((todo)=>
-                <TodoItem 
-                    todo={todo} 
-                    onToggle={onToggle} 
-                    onUpdate={onUpdate}
-                    onDelete={onDelete}
-                >
-                </TodoItem>)}
-            </div>
-        </div>
-    )
+  const { todos } = useTodo();
+
+  return (
+    <div className="flex flex-col gap-2">
+        {todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
+    </div>
+  );
 }

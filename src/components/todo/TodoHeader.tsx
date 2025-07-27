@@ -2,6 +2,7 @@ import { useTodo } from "@/contexts/todo/useTodo";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import CreateTodoModal from "./modal/CreateTodoModal";
+import { PlusIcon } from "lucide-react";
 
 
 export default function TodoHeader(){
@@ -12,14 +13,14 @@ export default function TodoHeader(){
     const remainigCount = todos.filter((todo) => !todo.completed).length
 
     return(
-        <div className="bg-gray-800">
+        <div className="flex flex-col border-b-black bg-pink-200">
             <div className="flex justify-between items-center">
-                <h1 className="text-3xl font-bold text-pink-300 mb-2">할일 목록</h1>
-                <Button variant="ghost" className="text hover:bg-pink-100 bg-pink-300" onClick={() => setIsCreateTodoModalOpen(true)}>
-                    추가
+                <h1 className="m-1 text-3xl font-bold text-gray-800 mb-2">할일 목록</h1>
+                <Button size="sm" className="m-3 text-black hover:bg-pink-100 bg-pink-400" onClick={() => setIsCreateTodoModalOpen(true)}>
+                    <PlusIcon /> 추가
                 </Button>
             </div>
-            <p className="text-pink-300">총 {remainigCount}개의 할일이 남았습니다.</p>
+            <p className="m-1.5 text-gray-800">총 {remainigCount}개의 할일이 남았습니다.</p>
 
             {isCreateTodoModalOpen && (
                 <CreateTodoModal

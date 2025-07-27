@@ -5,43 +5,45 @@ import { useRef } from "react";
 
 type Props = {
     isOpen: boolean;
-    todos: Todo[]
+    todo: Todo
 
-    onAdd: (todo: Todo) => void;
+    onUpdate: (todo: Todo) => void;
     onClose: () => void;
 }
 
-export default function CreateTodoModal({ isOpen, todos, onAdd, onClose }: Props){
+export default function UpdateTodoModal({ isOpen, todo, onUpdate, onClose }: Props){
+
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const handleAddTodo = () => {
-        if(inputRef.current) {
-            onAdd({
-                id: todos.length + 1,
-                title: inputRef.current.value.trim(),
-                completed: false
+    const handleUpdateTodo = () => {
+        if(inputRef.current){
+            onUpdate({
+                id: todo.id, 
+                title: inputRef.current.value.trim(), 
+                completed:false 
             });
+            console.log(todo);
             onClose();
         }
     }
-    
+
     return(
         <>
             <Dialog open={isOpen} onOpenChange={onClose}>
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>할일 추가</DialogTitle>
+                        <DialogTitle>할일 수정</DialogTitle>
                     </DialogHeader>
                     <div>
-                        <input ref={inputRef} placeholder="할일을 입력해주세요." />
+                        <input ref={inputRef} defaultValue={todo.title}></input>
                     </div>
 
                     <DialogFooter>
                         <Button variant="outline" onClick={onClose}>
                             취소
                         </Button>
-                        <Button type="submit" onClick={handleAddTodo}>
-                            저장
+                        <Button type="submit" onClick={handleUpdateTodo}>
+                            수정
                         </Button>
                     </DialogFooter>
                 </DialogContent>

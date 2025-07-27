@@ -5,9 +5,11 @@ type Props = {
     todos: Todo[];
 
     onToggle:(id: number) => void;
+    onUpdate:(todo: Todo) => void;
+    onDelete:(id: number) => void;
 }
 
-export default function TodoList({todos, onToggle}: Props){
+export default function TodoList({todos, onToggle, onDelete, onUpdate}: Props){
 
     return(
         <div>
@@ -15,7 +17,10 @@ export default function TodoList({todos, onToggle}: Props){
                 {todos.map((todo)=>
                 <TodoItem 
                     todo={todo} 
-                    onToggle={onToggle} >
+                    onToggle={onToggle} 
+                    onUpdate={onUpdate}
+                    onDelete={onDelete}
+                >
                 </TodoItem>)}
             </div>
         </div>
